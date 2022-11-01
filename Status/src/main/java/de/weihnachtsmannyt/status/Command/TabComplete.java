@@ -5,11 +5,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class TabComplete implements TabCompleter {
     @Override
@@ -17,8 +15,10 @@ public class TabComplete implements TabCompleter {
         ArrayList<String> list = new ArrayList<>();
         if (args.length == 0) return list;
         if (args.length == 1) {
+            list.add("help");
             list.add("set");
             list.add("reset");
+            list.add("get");
         }
         if (args.length == 2) {
             String operator = args[1].toLowerCase();
@@ -35,17 +35,39 @@ public class TabComplete implements TabCompleter {
                 case "set":
                     list.removeAll(list);
                     break;
+                case "get":
+                    for (Player online : Bukkit.getOnlinePlayers()) {
+                        list.add(online.getName());
+                    }
+                    break;
                 default:
                     return list;
             }
         }
         if (args.length == 3){
             for (int i=1;i<10;i++){
-                list.add(String.valueOf(i));
+                list.add("&"+i);
             }
             for (char c = 'a'; c <= 'f'; c++) {
-                list.add(String.valueOf(c));
+                list.add("&"+c);
             }
+
+            list.add("black");
+            list.add("dark_blue");
+            list.add("dark_green");
+            list.add("dark_aqua");
+            list.add("dark_red");
+            list.add("dark_purple");
+            list.add("gold");
+            list.add("gray");
+            list.add("dark_gray");
+            list.add("blue");
+            list.add("green");
+            list.add("aqua");
+            list.add("red");
+            list.add("light_purple");
+            list.add("yellow");
+            list.add("white");
         }
         if (args.length == 4 && sender.hasPermission("status.admin")){
             for (Player online : Bukkit.getOnlinePlayers()){
