@@ -1,0 +1,8 @@
+name: Status
+version: '${project.version}'
+main: de.weihnachtsmannyt.status.Status
+api-version: 1.19
+authors: [ WeihnachtsmannYT ]
+description: Status Plugin
+commands:
+  status:
